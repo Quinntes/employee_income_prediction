@@ -55,7 +55,7 @@ input_transformed = ct.transform(input_data)
 # Make prediction
 # -------------------------------
 if st.button('🔮 **Predict**'):
-    # Make prediction
+    # Prediksi pendapatan bulanan (model regresi)
     pred = model.predict(input_transformed)[0]
 
     # -------------------------------
@@ -63,5 +63,7 @@ if st.button('🔮 **Predict**'):
     # -------------------------------
     st.markdown('### 🏆 **Prediction Results**')
     st.write(f'**💰 Predicted Monthly Income**: {pred} USD')
-    st.progress(prob)  # Display the probability as a progress bar
-    st.caption(f'💡 **Probability of Income Prediction**: {prob:.2f}')
+
+    # Jika ingin menampilkan progress bar, bisa menggunakan nilai prediksi sebagai progres
+    # misalnya, jika prediksi rentangnya antara 1000 hingga 10000 USD, progress bar bisa digunakan
+    st.progress((pred - 1000) / (10000 - 1000))  # Menampilkan progress bar berdasarkan rentang prediksi
