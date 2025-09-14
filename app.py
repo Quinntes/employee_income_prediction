@@ -54,11 +54,8 @@ if st.button('🔮 **Predict**'):
     cat_cols = ['Gender', 'Marital Status', 'City', 'Department', 'Income Class', 'Education Level']
     num_cols = ['Age', 'Years Experience', 'Weekly Hours', 'Bonus Percentage', 'Performance Score', 'Overtime Hours']
 
-    # input_data[cat_cols] = input_data[cat_cols].astype(str)
-    # input_data[num_cols] = input_data[num_cols].astype(float)  # Use float for numerical columns
-    # Apply the same transformations to the input data
-    input_data_transformed = ct.transform(input_data)
-
+    input_data[cat_cols] = input_data[cat_cols].astype(str)
+    input_data[num_cols] = input_data[num_cols].astype(float)  # Use float for numerical columns
 
     # -------------------------------
     # Make prediction and calculate probability
