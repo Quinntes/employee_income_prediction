@@ -33,40 +33,31 @@ overtime_hours = st.number_input('⏰ **Overtime Hours (Monthly)**', min_value=0
 if st.button('🔮 **Predict**'):
     # Create a DataFrame with the user input
     input_data = pd.DataFrame({
-        'gender': [gender],
-        'marital_status': [marital_status],
-        'city': [city],
-        'education_level': [education_level],
-        'department': [department],
-        'income_class': [income_class],
-        'age': [age],
-        'years_experience': [years_experience],
-        'weekly_hours': [weekly_hours],
-        'bonus_percentage': [bonus_percentage],
-        'performance_score': [performance_score],
-        'overtime_hours': [overtime_hours]
+        'Gender': [gender],
+        'Marital Status': [marital_status],
+        'City': [city],
+        'Department': [department],
+        'Income Class': [income_class],
+        'Education Level': [education_level],
+        'Age': [age],
+        'Years Experience': [years_experience],
+        'Weekly Hours': [weekly_hours],
+        'Bonus Percentage': [bonus_percentage],
+        'Performance Score': [performance_score],
+        'Overtime Hours': [overtime_hours]
     })
 
     # -------------------------------
-    # Cast data types to match the model training data
-    # -------------------------------
-    cat_cols = ['gender', 'marital_status', 'city', 'department', 'income_class']
-    ord_cols = ['education_level']
-    num_cols = ['age', 'years_experience', 'weekly_hours', 'bonus_percentage', 'performance_score', 'overtime_hours']
-
-    input_data[cat_cols] = input_data[cat_cols].astype(str)
-    input_data[ord_cols] = input_data[ord_cols].astype(str)
-    input_data[num_cols] = input_data[num_cols].astype(int)
+    # Apply the same transformations to the input data
+    input_data_transformed = ct.transform(input_data)  # Apply the ColumnTransformer to the input data
 
     # -------------------------------
     # Make prediction and calculate probability
-    # -------------------------------
-    pred = model.predict(input_data)[0]
-    prob = model.predict_proba(input_data)[0][1]
+    pred = model.predict(input_data_transformed)[0]  # Use the transformed data for prediction
+    prob = model.predict_proba(input_data_transformed)[0][1]  # Use the transformed data for probability
 
     # -------------------------------
     # Show results to the user
-    # -------------------------------
     st.markdown('### 🏆 **Prediction Results**')
 
     st.write(f'**💰 Predicted Monthly Income**: {pred} USD')
