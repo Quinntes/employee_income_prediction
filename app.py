@@ -2,8 +2,9 @@ import streamlit as st
 import joblib
 import pandas as pd
 
-# Load model
+# Muat model dan preprocessing pipeline
 model = joblib.load('employee_income_prediction.joblib')
+ct = joblib.load('preprocessing_pipeline.joblib')
 
 # 🎉 Title of the app
 st.title('💰 **Monthly Income Prediction for Employees** 🚀')
@@ -13,7 +14,7 @@ st.title('💰 **Monthly Income Prediction for Employees** 🚀')
 # -------------------------------
 st.subheader('🔍 Please provide the employee details:')
 
-# Input fields based on the dataset columns
+# Input fields
 gender = st.selectbox('👩‍💼 **Gender**', ['Male', 'Female', 'Other'])
 marital_status = st.selectbox('💍 **Marital Status**', ['Single', 'Married', 'Divorced'])
 city = st.selectbox('🏙️ **City**', ['Surabaya', 'Jakarta', 'Bandung'])
@@ -28,46 +29,40 @@ performance_score = st.number_input('🏆 **Performance Score**', min_value=44, 
 overtime_hours = st.number_input('⏰ **Overtime Hours (Monthly)**', min_value=0, max_value=25, value=10)
 
 # -------------------------------
-# Prediction Section
+# Prepare the input data
+# -------------------------------
+input_data = pd.DataFrame({
+    'gender': [gender],
+    'marital_status': [marital_status],
+    'city': [city],
+    'department': [department],
+    'income_class': [income_class],
+    'education_level': [education_level],
+    'age': [age],
+    'years_experience': [years_experience],
+    'weekly_hours': [weekly_hours],
+    'bonus_percentage': [bonus_percentage],
+    'performance_score': [performance_score],
+    'overtime_hours': [overtime_hours]
+})
+
+# -------------------------------
+# Apply preprocessing to the input data
+# -------------------------------
+input_transformed = ct.transform(input_data)
+
+# -------------------------------
+# Make prediction
 # -------------------------------
 if st.button('🔮 **Predict**'):
-    # Create a DataFrame with the user input
-    input_data = pd.DataFrame({
-        'Gender': [gender],
-        'Marital Status': [marital_status],
-        'City': [city],
-        'Department': [department],
-        'Income Class': [income_class],
-        'Education Level': [education_level],
-        'Age': [age],
-        'Years Experience': [years_experience],
-        'Weekly Hours': [weekly_hours],
-        'Bonus Percentage': [bonus_percentage],
-        'Performance Score': [performance_score],
-        'Overtime Hours': [overtime_hours]
-    })
-
-    # -------------------------------
-    # Cast data types to match the model training data
-    # -------------------------------
-    # Cast data types to match the model training data
-    cat_cols = ['Gender', 'Marital Status', 'City', 'Department', 'Income Class', 'Education Level']
-    num_cols = ['Age', 'Years Experience', 'Weekly Hours', 'Bonus Percentage', 'Performance Score', 'Overtime Hours']
-
-    input_data[cat_cols] = input_data[cat_cols].astype(str)
-    input_data[num_cols] = input_data[num_cols].astype(float)  # Use float for numerical columns
-
-    # -------------------------------
-    # Make prediction and calculate probability
-    # -------------------------------
-    pred = model.predict(input_data)[0]
-    prob = model.predict_proba(input_data)[0][1]
+    # Make prediction
+    pred = model.predict(input_transformed)[0]
+    prob = model.predict_proba(input_transformed)[0][1]
 
     # -------------------------------
     # Show results to the user
     # -------------------------------
     st.markdown('### 🏆 **Prediction Results**')
-
     st.write(f'**💰 Predicted Monthly Income**: {pred} USD')
     st.progress(prob)  # Display the probability as a progress bar
     st.caption(f'💡 **Probability of Income Prediction**: {prob:.2f}')
