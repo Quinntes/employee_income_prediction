@@ -57,7 +57,6 @@ input_transformed = ct.transform(input_data)
 if st.button('🔮 **Predict**'):
     # Make prediction
     pred = model.predict(input_transformed)[0]
-    prob = model.predict_proba(input_transformed)[0][1]
 
     # -------------------------------
     # Show results to the user
