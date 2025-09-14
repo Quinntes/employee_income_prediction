@@ -67,9 +67,15 @@ if st.button('🔮 **Predict**'):
     st.markdown('### 🏆 **Prediction Results**')
     st.write(f'**💰 Predicted Monthly Income**: {pred_formatted} IDR')
 
-    # Menggunakan rentang dari 878,000 hingga 148,880,000 USD untuk progress bar
+    # Rentang pendapatan untuk progress bar
     min_income = 878000  # 878 ribu USD
     max_income = 148880000  # 148 juta 880 ribu USD
 
-    # Menampilkan progress bar berdasarkan rentang prediksi yang telah ditentukan
-    st.progress((pred - min_income) / (max_income - min_income))  # Rentang berdasarkan min dan max
+    # Perhitungan progress, pastikan berada di dalam rentang [0, 1]
+    progress_value = (pred - min_income) / (max_income - min_income)
+
+    # Batasi nilai progress dalam rentang [0, 1]
+    progress_value = max(0, min(1, progress_value))
+
+    # Menampilkan progress bar berdasarkan nilai yang sudah dibatasi
+    st.progress(progress_value)  # Rentang berdasarkan min dan max
