@@ -48,16 +48,27 @@ if st.button('🔮 **Predict**'):
     })
 
     # -------------------------------
+    # Cast data types to match the model training data
+    # -------------------------------
+    # Cast data types to match the model training data
+    cat_cols = ['Gender', 'Marital Status', 'City', 'Department', 'Income Class', 'Education Level']
+    num_cols = ['Age', 'Years Experience', 'Weekly Hours', 'Bonus Percentage', 'Performance Score', 'Overtime Hours']
+
+    # input_data[cat_cols] = input_data[cat_cols].astype(str)
+    # input_data[num_cols] = input_data[num_cols].astype(float)  # Use float for numerical columns
     # Apply the same transformations to the input data
-    input_data_transformed = ct.transform(input_data)  # Apply the ColumnTransformer to the input data
+    input_data_transformed = ct.transform(input_data)
+
 
     # -------------------------------
     # Make prediction and calculate probability
-    pred = model.predict(input_data_transformed)[0]  # Use the transformed data for prediction
-    prob = model.predict_proba(input_data_transformed)[0][1]  # Use the transformed data for probability
+    # -------------------------------
+    pred = model.predict(input_data)[0]
+    prob = model.predict_proba(input_data)[0][1]
 
     # -------------------------------
     # Show results to the user
+    # -------------------------------
     st.markdown('### 🏆 **Prediction Results**')
 
     st.write(f'**💰 Predicted Monthly Income**: {pred} USD')
