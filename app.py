@@ -58,27 +58,9 @@ if st.button('🔮 **Predict**'):
     # Prediksi pendapatan bulanan (model regresi)
     pred = model.predict(input_transformed)[0]
 
-    # Format prediksi dengan hanya dua angka di belakang koma
-    pred_formatted = f"{pred:,.2f}"  # Format angka dengan dua angka di belakang koma dan koma sebagai pemisah ribuan
+    # Format prediksi dengan dua angka di belakang koma dalam USD
+    pred_formatted = f"{pred:,.2f}"  # Format angka dengan dua angka di belakang koma dan titik sebagai pemisah desimal
 
-    # Ganti titik dengan koma untuk format desimal Indonesia
-    pred_formatted = pred_formatted.replace(',', ' ').replace('.', ',')
-
-    # -------------------------------
-    # Show results to the user
-    # -------------------------------
+    # Menampilkan hasil prediksi dalam USD
     st.markdown('### 🏆 **Prediction Results**')
-    st.write(f'**💰 Predicted Monthly Income**: {pred_formatted} IDR')
-
-    # Rentang pendapatan untuk progress bar
-    min_income = 878  # 878 USD
-    max_income = 148880  # 148 ribu USD
-
-    # Perhitungan progress, pastikan berada di dalam rentang [0, 1]
-    progress_value = (pred - min_income) / (max_income - min_income)
-
-    # Batasi nilai progress dalam rentang [0, 1]
-    progress_value = max(0, min(1, progress_value))
-
-    # Menampilkan progress bar berdasarkan nilai yang sudah dibatasi
-    st.progress(progress_value)  # Rentang berdasarkan min dan max
+    st.write(f'**💰 Predicted Monthly Income**: ${pred_formatted} USD')
