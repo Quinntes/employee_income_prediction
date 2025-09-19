@@ -137,15 +137,13 @@ See in the [streamlit] folder.
 Tableau:
 See the [TABLEAU Dashboard](https://public.tableau.com/views/employee_income_prediction/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link) for details.
 
-Ready for integration into production systems for real-time predictions.
-
 ---
 
 ## Usage
 
 ```python
 import joblib
-import pandas as pd
+import pandas as pds
 
 # Load model and pipeline
 model = joblib.load('employee_income_prediction.joblib')
