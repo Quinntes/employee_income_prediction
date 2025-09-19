@@ -1,7 +1,3 @@
-Berikut revisi README yang lebih konsisten, ringkas, dan selaras dengan seluruh analisis yang telah kamu lakukan:
-
----
-
 # Employee Monthly Income Prediction
 
 This project aims to predict **employee monthly income** using regression models based on various features such as department, city, education level, experience, and performance. The goal is to support **data-driven compensation planning**, uncover **pay disparities**, and guide **HR and finance decisions** with interpretable insights.
