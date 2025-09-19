@@ -128,10 +128,12 @@ Saved using `Joblib`:
 - **Pipeline**: Includes imputation, scaling, and encoding  
 
 Strealit:
-See in the [streamlit] folder.
+
+- See in the [streamlit] folder.
 
 Tableau:
-See the [TABLEAU Dashboard](https://public.tableau.com/views/employee_income_prediction/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link) for details.
+
+- See the [TABLEAU Dashboard](https://public.tableau.com/views/employee_income_prediction/Dashboard1?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link) for details.
 
 ---
 
