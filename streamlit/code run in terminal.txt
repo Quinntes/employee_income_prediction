@@ -1,0 +1,2 @@
+cd "C:\Users\ahmad\OneDrive\Documents\Bootcamp\Github\employee_income_prediction\streamlit"
+streamlit run app.py
