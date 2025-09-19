@@ -129,7 +129,7 @@ Saved using `Joblib`:
 
 Strealit:
 
-- See in the [streamlit] folder.
+- See in the [streamlit] (https://github.com/Quinntes/employee_income_prediction/tree/main/streamlit) folder.
 
 Tableau:
 
