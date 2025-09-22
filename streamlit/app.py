@@ -2,7 +2,7 @@ import streamlit as st
 import joblib
 import pandas as pd
 
-# Muat model dan preprocessing pipeline
+# Load model and preprocessing pipeline
 model = joblib.load('employee_income_prediction.joblib')
 ct = joblib.load('preprocessing_pipeline.joblib')
 
